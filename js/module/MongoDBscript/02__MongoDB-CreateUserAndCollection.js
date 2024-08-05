@@ -1,17 +1,19 @@
-const adminUser			  = 'root';
-const adminPass		 	  = 'root';
-const adminDB         = 'admin';
+const adminUser			  = 'root';  //логин  административной уч записи
+const adminPass		 	  = 'root';  //пароль административной уч записи
+const adminDB         = 'admin'; //имя административной БД уч записи
 
-const dbRole			    = 'dbOwner';
+const dbRole			    = 'dbOwner'; // роль, в терминологии MongoDB, уч записей операторских БД
 
+// Список БД, список пользователей, список паролей учетных записей
 const dbName			    = ['dbFramework1',  'dbFramework2', 'dbFramework3', 'dbFramework4', 'dbFramework5', 'dbSystem'];
 const dbUser			    = ['operator1',     'operator2',    'operator3',    'operator4',    'operator5',    'system'];
 const passUser        = ['pass12',        '34pass',       'pwd567',       '890pwd',       '12op34',       'J7gH5f'];
 
-const collectionName  = ['rawData', 'workData', 'archiveData', 'systemData', 'projectData'];
+// Список коллекций, которые будут созданы в каждой БД
+const collectionName  = ['rawData', 'workData', 'archiveData', 'loggingData', 'systemData', 'projectData', 'devicesHandbook'];
 
-const timeLimit       = 864000;   // 10 суток
-const byteLimit       = 52428800; // 50 Мбт
+const timeLimit       = 864000;   // время жизни коллекций timeseries: 10 суток
+const byteLimit       = 52428800; // ограничение размера коллекций capped: 50 Мбт
 
 let db = null; //объектная переменная, хранящая объект-БД с которой ведется работа
 
@@ -65,11 +67,12 @@ for (const [i, currentDbName] of dbName.entries()) {
    * БЛОК СОЗДАНИЯ КОЛЛЕКЦИЙ
    */
   for (const [j, curCollection] of collectionName.entries()){
-    //Перед созданием проверить, не существует ли она уже в БД и если да, удалить ее
+    //Перед созданием проверить, не существует ли коллекция в БД, если да - удалить
     if (db.getCollectionNames().includes(curCollection)) {
       db.getCollection(curCollection).drop();
       print(`[этап 3] >> коллекция ${curCollection} была удалена из базы данных ${currentDbName}.`);
     }
+    
     //	Создать в текущей БД коллекцию типа timeseries
     if (j>=0 && j<2){
       db.createCollection(curCollection, {
@@ -82,7 +85,7 @@ for (const [i, currentDbName] of dbName.entries()) {
       print(`[этап 3] >> коллекция ${curCollection} типа timeseries была создана в базе данных ${currentDbName}.`);
     }
     //	Создать в текущей БД коллекцию типа capped
-    if(j==2){
+    if(j>=2 && j<4){
       db.createCollection(curCollection, {
         capped: true,
         size:   byteLimit //ограничение размера коллекции в байтах
@@ -90,7 +93,7 @@ for (const [i, currentDbName] of dbName.entries()) {
       print(`[этап 3] >> коллекция ${curCollection} типа capped была создана в базе данных ${currentDbName}.`);
     }
     //	Создать в текущей БД коллекцию типа standart
-    if(j>2){
+    if(j>3){
       db.createCollection(curCollection);
       print(`[этап 3] >> коллекция ${curCollection} типа standard была создана в базе данных ${currentDbName}.`);
     }
