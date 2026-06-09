@@ -71,15 +71,14 @@ async function updateDatabase() {
     { user: 'operator3', pwd: 'pwd567', roles: [{ role: 'dbOwner', db: '' }] },
     { user: 'operator4', pwd: '890pwd', roles: [{ role: 'dbOwner', db: '' }] },
     { user: 'operator5', pwd: '12op34', roles: [{ role: 'dbOwner', db: '' }] },
-    { user: 'graylog', pwd: 'k45Fw8', roles: [{ role: 'dbOwner', db: '' }] },
-    { user: 'system', pwd: 'J7gH5f', roles: [{ role: 'dbOwner', db: '' }] },
+    { user: 'graylog',   pwd: 'k45Fw8', roles: [{ role: 'dbOwner', db: '' }] },
+    { user: 'system',    pwd: 'J7gH5f', roles: [{ role: 'dbOwner', db: '' }] },
   ];
   const timeLimit = 864000; // время жизни коллекций timeseries: 10 суток
   const byteLimit = 52428800; // ограничение размера коллекций capped: 50 Мбт
 
   // Подключится к MongoDB с использованием административной учетной записи
-  //const client = new MongoClient('mongodb://admin:Gr4a7y@127.0.0.1:27017/admin');
-  const client = new MongoClient('mongodb://admin:Gr4a7y@192.168.53.251:27017/admin');
+  const client = new MongoClient('mongodb://admin:Gr4a7y@127.0.0.1:27017/admin');
   await client.connect(); //подключиться к серверу
 
   let msgStage1 = []; // сообщения этапа 1 удаления коллекций

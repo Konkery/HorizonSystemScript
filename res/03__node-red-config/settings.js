@@ -19,94 +19,40 @@
  *  - Node Settings
  *
  **/
-
-module.exports = {
-
-/*******************************************************************************
- * Flow File and User Directory Settings
- *  - flowFile
- *  - credentialSecret
- *  - flowFilePretty
- *  - userDir
- *  - nodesDir
- ******************************************************************************/
-
-    /** The file containing the flows. If not set, defaults to flows_<hostname>.json **/
-    flowFile: 'flows.json',
-
-    /** By default, credentials are encrypted in storage using a generated key. To
-     * specify your own secret, set the following property.
-     * If you want to disable encryption of credentials, set this property to false.
-     * Note: once you set this property, do not change it - doing so will prevent
-     * node-red from being able to decrypt your existing credentials and they will be
-     * lost.
-     */
-    //credentialSecret: "a-secret-key",
-
-    /** By default, the flow JSON will be formatted over multiple lines making
-     * it easier to compare changes when using version control.
-     * To disable pretty-printing of the JSON set the following property to false.
-     */
-    flowFilePretty: true,
-
-    /** By default, all user data is stored in a directory called `.node-red` under
-     * the user's home directory. To use a different location, the following
-     * property can be used
-     */
-    //userDir: '/home/nol/.node-red/',
-
-    /** Node-RED scans the `nodes` directory in the userDir to find local node files.
-     * The following property can be used to specify an additional directory to scan.
-     */
-    //nodesDir: '/home/nol/.node-red/nodes',
-
-/*******************************************************************************
- * Security
- *  - adminAuth
- *  - https
- *  - httpsRefreshInterval
- *  - requireHttps
- *  - httpNodeAuth
- *  - httpStaticAuth
- ******************************************************************************/
-
-    /** To password protect the Node-RED editor and admin API, the following
-     * property can be used. See https://nodered.org/docs/security.html for details.
-     */
     adminAuth: {
-        type: "credentials",
+        type: 'credentials',
         users: [
-            {
-                username: "operator1",
-                password: "$2y$08$4HwAbXZo8IPwKcHfC1tLOeurkficCrCCGi6SdccdE2XlaYcOYT0kC",
-                permissions: "*"
-            },
-            {
-                username: "operator2",
-                password: "$2y$08$qnRO67K3YH7BmnFgg8.Z4.871jpavRCUM6Z3OBvq2U2PO/WGJDb4C",
-                permissions: "*"
-            },
-            {
-                username: "operator3",
-                password: "$2y$08$sJuJuUUssz98FXH6yF3C5u/6mUtcCBr0KyLMF9r/yefl4O0aYdM6m",
-                permissions: "*"
-            },
-            {
-                username: "operator4",
-                password: "$2y$08$RHb7AFOsBZd7xDJxUWf8deqn/inXV3vjMo9svvNTndrmvs/Hb3vAK",
-                permissions: "*"
-            },
-            {
-                username: "operator5",
-                password: "$2y$08$SqHdsK0Sde7k2/OpQX5QNejxWl/eW0TSbhxRP7joV9ju5ty.tEgjG",
-                permissions: "*"
-            },
-            {
-                username: "system",
-                password: "$2y$08$jlknOhV85ODimMw.0TI0gO/NO4z/sniBFqJPxlx4K3WxeEcWYrtSS",
-                permissions: "*"
-            }
-        ]
+        {
+                username: 'operator1',
+                password: '$2b$08$qF7ZEVuY./cQWKQwkQtgPOG/0fEqZoq2mPSrvFPwC3BYZFMcp8LGe',
+                permissions: '*'
+        },
+        {
+                username: 'operator2',
+                password: '$2b$08$wVVZNau1C//hEQge977TfO3L2IqHu6DiW19Fv1Iqgf6upsfuSKfKO',
+                permissions: '*'
+        },
+        {
+                username: 'operator3',
+                password: '$2b$08$N23BRRdPM2bPa7RL5af/iOKwrzsjtvQ7meaur8azv4k7zNpGMOnGa',
+                permissions: '*'
+        },
+        {
+                username: 'operator4',
+                password: '$2b$08$ew.P0a0zwLCeXlQXzTl7wOiCKUcLaNi/PCSCZyDFEJ2Y6IkMwOnn6',
+                permissions: '*'
+        },
+        {
+                username: 'operator5',
+                password: '$2b$08$20B9ADV.jObfOlllsiUoo.iZQ0VqgmskDHusCgWLln5v3Nz7vKBqK',
+                permissions: '*'
+        },
+        {
+                username: 'system',
+                password: '$2b$08$gOt4aHDYjuSsQJROtlP9p.hYffkrX5LS9DufW4PKQhdN6Ydn4xB9K',
+                permissions: '*'
+        }
+]
     },
 
     /** The following property can be used to enable HTTPS
@@ -170,7 +116,7 @@ module.exports = {
  ******************************************************************************/
 
     /** the tcp port that the Node-RED web server is listening on */
-    uiPort: process.env.PORT || 2001,
+    uiPort: process.env.PORT || 2003,
 
     /** By default, the Node-RED UI accepts connections on all IPv4 interfaces.
      * To listen on all IPv6 addresses, set uiHost to "::",
@@ -300,6 +246,7 @@ module.exports = {
  * Runtime Settings
  *  - lang
  *  - runtimeState
+ *  - telemetry
  *  - diagnostics
  *  - logging
  *  - contextStorage
@@ -337,6 +284,22 @@ module.exports = {
         enabled: false,
         /** show or hide runtime stop/start options in the node-red editor. Must be set to `false` to hide */
         ui: false,
+    },
+    telemetry: {
+        /** 
+         * By default, telemetry is disabled until the user provides consent the first
+         * time they open the editor.
+         * 
+         * The following property can be uncommented and set to true/false to enable/disable
+         * telemetry without seeking further consent in the editor.
+         * The user can override this setting via the user settings dialog within the editor
+         */
+        // enabled: true,
+        /**
+         * If telemetry is enabled, the editor will notify the user if a new version of Node-RED
+         * is available. Set the following property to false to disable this notification.
+         */
+        // updateNotification: true
     },
     /** Configure the logging output */
     logging: {
@@ -500,6 +463,7 @@ module.exports = {
  *  - fileWorkingDirectory
  *  - functionGlobalContext
  *  - functionExternalModules
+ *  - globalFunctionTimeout
  *  - functionTimeout
  *  - nodeMessageBufferMaxLength
  *  - ui (for use with Node-RED Dashboard)
@@ -526,7 +490,19 @@ module.exports = {
     /** Allow the Function node to load additional npm modules directly */
     functionExternalModules: true,
 
-    /** Default timeout, in seconds, for the Function node. 0 means no timeout is applied */
+
+    /**
+     * The default timeout (in seconds) for all Function nodes.
+     * Individual nodes can set their own timeout value within their configuration.
+     */
+    globalFunctionTimeout: 0,
+
+    /**
+      * Default timeout, in seconds, for the Function node. 0 means no timeout is applied
+      * This value is applied when the node is first added to the workspace - any changes
+      * must then be made with the individual node configurations.
+      * To set a global timeout value, use `globalFunctionTimeout`
+     */
     functionTimeout: 0,
 
     /** The following property can be used to set predefined values in Global Context.
