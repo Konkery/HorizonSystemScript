@@ -1,4 +1,9 @@
 /**
+ * ООО "МАС"
+ * Ревизия: rev.03
+ * Версия: v01
+ * Дата: 10 июня 2026 г.
+ *
  * Horizon Server: Auth Sync Utility (v1.0)
  * Скрипт для работы на Хабе. Синхронизирует пароли Node-RED с MongoDB.
  */
@@ -9,7 +14,7 @@ const path = require('path');
 const os = require('os');
 
 // Конфигурация путей (адаптировано под Хаб)
-const MONGO_SCRIPT_PATH = '/home/operator3/work/js/app/MongoDBscript/03__MongoDB-CreateUserAndCollection-rev.01-v05.js';
+const MONGO_SCRIPT_PATH = '/home/operator3/work/js/app/MongoDBscript/03__MongoDB-CreateUserAndCollection-rev.03-v01.js';
 const SETTINGS_PATH = path.join(os.homedir(), '.node-red', 'settings.js');
 
 async function sync() {

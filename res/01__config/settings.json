@@ -1,0 +1,105 @@
+{
+  "_comment": "Конфигурация платформы Horizon Automation. Поля 'description' поясняют назначение параметров.",
+  "system": {
+    "description": "Системные настройки СУБД и окружения",
+    "mongoUri": "mongodb://localhost:27017",
+    "admin": {
+      "description": "Учетные данные суперпользователя MongoDB (root)",
+      "user": "admin",
+      "password": "Gr4a7y"
+    },
+    "vending": {
+      "description": "Параметры вендингового аппарата и инстансов",
+      "machineName": "MAS-n1701-F1757N001-VMhyb-01",
+      "instancesCount": 3,
+      "startPort": 2001,
+      "dbBaseName": "dbHA",
+      "userBaseName": "operator"
+    }
+  },
+  "collectionTemplates": {
+    "description": "Шаблоны коллекций для каждого инстанса Horizon Automation",
+    "list": [
+      {
+        "name": "rawData",
+        "type": "TimeSeries",
+        "params": {
+          "timeseries": {
+            "timeField": "timestamp",
+            "metaField": "metadata"
+          },
+          "expireAfterSeconds": 864000
+        }
+      },
+      {
+        "name": "fineData",
+        "description": "Ранее называлась workData. Хранит обработанные данные.",
+        "type": "TimeSeries",
+        "params": {
+          "timeseries": {
+            "timeField": "timestamp",
+            "metaField": "metadata"
+          },
+          "expireAfterSeconds": 864000
+        }
+      },
+      {
+        "name": "archiveData",
+        "type": "Capped",
+        "params": {
+          "capped": true,
+          "size": 52428800
+        }
+      },
+      {
+        "name": "loggingData",
+        "type": "Capped",
+        "params": {
+          "capped": true,
+          "size": 52428800
+        }
+      },
+      {
+        "name": "systemData",
+        "type": "Standart",
+        "params": {}
+      },
+      {
+        "name": "projectData",
+        "type": "Standart",
+        "params": {}
+      },
+      {
+        "name": "devicesHandbook",
+        "type": "Standart",
+        "params": {}
+      }
+    ]
+  },
+  "externalServices": [
+    {
+      "description": "Статическая конфигурация для Graylog",
+      "dbName": "dbGraylog",
+      "username": "graylog",
+      "collections": [
+        {
+          "name": "messages",
+          "type": "Standart",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "description": "Резервная системная БД",
+      "dbName": "dbSystem",
+      "username": "system",
+      "collections": [
+        {
+          "name": "registry",
+          "type": "Standart",
+          "params": {}
+        }
+      ]
+    }
+  ]
+}

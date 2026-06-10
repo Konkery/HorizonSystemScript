@@ -1,4 +1,9 @@
 /**
+ * ООО "МАС"
+ * Ревизия: rev.03
+ * Версия: v01
+ * Дата: 10 июня 2026 г.
+ *
  * This is the default settings file provided by Node-RED.
  *
  * It can contain any valid JavaScript code that will get run when Node-RED

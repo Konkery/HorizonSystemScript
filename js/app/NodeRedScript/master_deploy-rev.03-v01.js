@@ -1,4 +1,9 @@
 /**
+ * ООО "МАС"
+ * Ревизия: rev.03
+ * Версия: v01
+ * Дата: 10 июня 2026 г.
+ *
  * Horizon Hub: Master Deployer (v4.5 - Robust Hash Substitution)
  * 
  * ЗАПУСКАТЬ НА ПК ИНЖЕНЕРА.
@@ -13,7 +18,7 @@ const path = require('path');
 // --- КОНФИГУРАЦИЯ ---
 const HUB_IP = '10.130.1.11';
 const MASTER_USER = 'operator3'; 
-const MONGO_SCRIPT_PATH = path.resolve(__dirname, '..', 'MongoDBscript', '03__MongoDB-CreateUserAndCollection-rev.01-v05.js');
+const MONGO_SCRIPT_PATH = path.resolve(__dirname, '..', 'MongoDBscript', '03__MongoDB-CreateUserAndCollection-rev.03-v01.js');
 
 const targetInstances = [
     { name: 'operator1', port: 2001, service: 'nodered1' },

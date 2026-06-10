@@ -1,4 +1,9 @@
 #!/bin/sh -e
+# ООО "МАС"
+# Ревизия: rev.03
+# Версия: v01
+# Дата: 10 июня 2026 г.
+#
 # *** SAFE SHUTDOWN ***
 # Modify /etc/systemd/logind.conf
 if ! systemd-analyze cat-config systemd/logind.conf |

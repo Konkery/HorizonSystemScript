@@ -1,0 +1,11 @@
+{
+  "name": "horizon-system-script",
+  "version": "3.1.0",
+  "description": "Системные скрипты инициализации компонентов Horizon Automation",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "mongodb": "^6.8.0",
+    "bcryptjs": "^3.0.3"
+  }
+}
