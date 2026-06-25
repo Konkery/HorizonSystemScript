@@ -5,10 +5,12 @@
 ## Основные положения
 1.  **Тип коммита:** Обязательно в нижнем регистре.
 2.  **Грамматика:**
-    *   **Время:** Настоящее время (Present tense) — `add feature`, не `added feature`.
-    *   **Настроение:** Повелительное наклонение (Imperative mood) — `move cursor`, не `moves cursor`.
+    *   **Язык:** Описания коммитов должны быть на **русском языке**.
+    *   **Время:** Настоящее время (Present tense) — `добавить функционал`, не `добавил функционал`.
+    *   **Настроение:** Повелительное наклонение (Imperative mood) — `добавить`, не `добавляет`.
 3.  **Формат сообщения:** `тип: описание`.
 4.  **Локальная нумерация:** При необходимости использовать формат `[YYYYMMDD]-[Тип]-[Краткое описание]` для внутренней идентификации этапов.
+5.  **Обязательное действие:** ПЕРЕД выполнением любого коммита необходимо перечитать данный файл `git-convention.md`.
 
 ## Список типов коммитов
 - `init`: Начало проекта/задачи.
@@ -22,24 +24,6 @@
 
 ## Примеры
 
-### init:
-- `init: start project configuration`
-
 ### feat:
-- `feat: implement dynamic configuration loader`
-- `feat: add systemd service generator`
-
-### fix:
-- `fix: correct mongodb connection string`
-- `fix: adjust port settings for instance #2`
-
-### refactor:
-- `refactor: rename settings.json to settings_ha.json`
-- `refactor: apply prettier formatting`
-
-### docs:
-- `docs: update deployment manual`
-- `docs: update git commit conventions`
-
-### val:
-- `val: validate infrastructure before deployment`
+- `feat: реализовать загрузчик конфигурации`
+- `feat: добавить генератор systemd сервисов`

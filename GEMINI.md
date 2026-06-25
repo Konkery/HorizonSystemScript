@@ -41,6 +41,9 @@
   2. Исполнение последовательности шагов без прерываний после утверждения плана.
   3. Валидация изменений (тесты, проверка метаданных, актуализация документации).
 - **Automation:** Всегда используйте навыки, описанные в `.gemini/skills/automation-guide/SKILL.md`.
+- **Commit Convention:**
+  - Все сообщения коммитов должны быть на **русском языке**, следовать формату `тип: описание` и нотации [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/).
+  - ПЕРЕД выполнением любого коммита обязательно перечитать `res/02__документация/01__git-commit/git-convention.md`.
 
 ## 6. Automation & Skills Reference
 - Используйте инструкции по автоматизации: `.gemini/skills/automation-guide/SKILL.md`.
