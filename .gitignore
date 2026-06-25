@@ -2,3 +2,6 @@
 .vscode/*
 *.code-workspace
 node_modules
+.agents
+.qwen
+package-lock.json
