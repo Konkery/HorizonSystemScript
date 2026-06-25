@@ -1,0 +1,36 @@
+Host lenovo-ivan
+    HostName lenovo-ivan.lan
+    StrictHostKeyChecking no
+    UserKnownHostsFile NUL
+    User ivan
+    IdentityFile ~/.ssh/key_lenovo
+Host hub-low-operator1
+    HostName 10.130.2.11
+    StrictHostKeyChecking no
+    UserKnownHostsFile NUL
+    User operator1
+    IdentityFile ~/.ssh/hub_rsa_operator1
+Host hub-low-operator2
+    HostName 10.130.2.11
+    StrictHostKeyChecking no
+    UserKnownHostsFile NUL
+    User operator2
+    IdentityFile ~/.ssh/hub_rsa_operator2
+Host hub-low-operator3
+    HostName 10.130.2.11
+    StrictHostKeyChecking no
+    UserKnownHostsFile NUL
+    User operator3
+    IdentityFile ~/.ssh/hub_rsa_operator3
+Host hub-low-operator4
+    HostName 10.130.2.11
+    StrictHostKeyChecking no
+    UserKnownHostsFile NUL
+    User operator4
+    IdentityFile ~/.ssh/hub_rsa_operator4
+Host hub-low-operator5
+    HostName 10.130.2.11
+    StrictHostKeyChecking no
+    UserKnownHostsFile NUL
+    User operator5
+    IdentityFile ~/.ssh/hub_rsa_operator5

@@ -1,0 +1,379 @@
+{
+  "projectID": "27/2025-N1-МАС",
+  "machineNAME": "MAS-n1701-F1757N001-VMhyb-01",
+  "description": "Конфигурация трёхуровневой АСУ вендингового аппарата",
+  "globalUsers": [
+    {
+      "userTemplate": "system",
+      "typeNameUsers": "static",
+      "role": "administrator"
+    }
+  ],
+  "hubLow": {
+    "sessionGeneration": false,
+    "description": "Конфигурация АСУ - нижний уровень",
+    "system": {
+      "hubIP": "10.130.1.11",
+      "hostNamePrefix": "hubLow",
+      "users": [
+        {
+          "userTemplate": "operator",
+          "typeNameUsers": "dynamic",
+          "role": "operator",
+          "countUsers": 5
+        }
+      ]
+    },
+    "internalServices": {
+      "description": "Конфигурация программных компонентов фреймворка HA - нижний уровень",
+      "generalDatabase": {
+        "description": "Конфигурация рабочих БД фреймворка HA",
+        "horizonAutomation": {
+          "typeDBMS": "MongoDB",
+          "dbPostfix": "-general-ASUlow-HA",
+          "collectionGeneral_HA": {
+            "description": "Шаблоны коллекций для основной БД фреймворка HA",
+            "list": [
+              {
+                "name": "rawData",
+                "description": "Хранение 'сырых', необработанных данных",
+                "type": "TimeSeries",
+                "params": {
+                  "timeseries": {
+                    "timeField": "timestamp",
+                    "metaField": "metadata",
+                    "granularity": "seconds"
+                  },
+                  "expireAfterSeconds": 864000
+                }
+              },
+              {
+                "name": "fineData",
+                "description": "Хранение обработанных, нормализованных данных",
+                "type": "TimeSeries",
+                "params": {
+                  "timeseries": {
+                    "timeField": "timestamp",
+                    "metaField": "metadata",
+                    "granularity": "seconds"
+                  },
+                  "expireAfterSeconds": 864000
+                }
+              },
+              {
+                "name": "archiveData",
+                "description": "Архив важных событий. Кольцевой буфер.",
+                "type": "Capped",
+                "params": {
+                  "capped": true,
+                  "size": 52428800
+                }
+              },
+              {
+                "name": "loggingData",
+                "description": "Внутренние журналы работы платформы. Кольцевой буфер.",
+                "type": "Capped",
+                "params": {
+                  "capped": true,
+                  "size": 52428800
+                }
+              },
+              {
+                "name": "systemData",
+                "description": "Системные флаги и параметры времени выполнения",
+                "type": "Standart",
+                "params": {}
+              },
+              {
+                "name": "projectData",
+                "description": "Конфигурационные данные проекта",
+                "type": "Standart",
+                "params": {}
+              },
+              {
+                "name": "devicesHandbook",
+                "description": "Библиотека-справочник типов устройств.",
+                "type": "Standart",
+                "params": {}
+              }
+            ]
+          }
+        },
+        "systemDatabases": {
+          "description": "Конфигурация системных БД вендингового аппарата (пусто на данном хабе)"
+        }
+      }
+    },
+    "externalServices": {
+      "description": "Конфигурация дополнительных программных компонентов HA - уровень аппарат",
+      "dataBase": {
+        "description": "Конфигурация БД внешних сервисов (пусто на данном хабе)"
+      },
+      "settingsServices": {
+        "description": "Конфигурация переменных внешних сервисов",
+        "nodeRed": {
+          "description": "Конфигурация сервера Node-Red",
+          "startPort": 2001
+        }
+      }
+    }
+  },
+  "hubMid": {
+    "description": "Конфигурация АСУ - средний уровень",
+    "sessionGeneration": false,
+    "system": {
+      "hubIP": "10.130.1.12",
+      "hostNamePrefix": "hubMid",
+      "users": [
+        {
+          "userTemplate": "operator",
+          "typeNameUsers": "dynamic",
+          "role": "operator",
+          "countUsers": 1
+        }
+      ]
+    },
+    "internalServices": {
+      "description": "Конфигурация программных компонентов фреймворка HA - средний уровень",
+      "generalDatabase": {
+        "description": "Конфигурация рабочих БД фреймворка HA",
+        "horizonAutomation": {
+          "typeDBMS": "MongoDB",
+          "dbPostfix": "-general-ASUmid-HA",
+          "collectionGeneral_HA": {
+            "description": "Шаблоны коллекций для основной БД фреймворка HA",
+            "list": [
+              {
+                "name": "rawData",
+                "description": "Хранение 'сырых', необработанных данных",
+                "type": "TimeSeries",
+                "params": {
+                  "timeseries": {
+                    "timeField": "timestamp",
+                    "metaField": "metadata",
+                    "granularity": "seconds"
+                  },
+                  "expireAfterSeconds": 864000
+                }
+              },
+              {
+                "name": "fineData",
+                "description": "Хранение обработанных, нормализованных данных",
+                "type": "TimeSeries",
+                "params": {
+                  "timeseries": {
+                    "timeField": "timestamp",
+                    "metaField": "metadata",
+                    "granularity": "seconds"
+                  },
+                  "expireAfterSeconds": 864000
+                }
+              },
+              {
+                "name": "archiveData",
+                "description": "Архив важных событий. Кольцевой буфер.",
+                "type": "Capped",
+                "params": {
+                  "capped": true,
+                  "size": 52428800
+                }
+              },
+              {
+                "name": "loggingData",
+                "description": "Внутренние журналы работы платформы. Кольцевой буфер.",
+                "type": "Capped",
+                "params": {
+                  "capped": true,
+                  "size": 52428800
+                }
+              },
+              {
+                "name": "systemData",
+                "description": "Системные флаги и параметры времени выполнения",
+                "type": "Standart",
+                "params": {}
+              },
+              {
+                "name": "projectData",
+                "description": "Конфигурационные данные проекта",
+                "type": "Standart",
+                "params": {}
+              },
+              {
+                "name": "devicesHandbook",
+                "description": "Библиотека-справочник типов устройств.",
+                "type": "Standart",
+                "params": {}
+              }
+            ]
+          }
+        },
+        "systemDatabases": {
+          "description": "Конфигурация системных БД вендингового аппарата",
+          "systemVM": {
+            "typeDBMS": "MongoDB",
+            "dbPostfix": "-system-VM",
+            "collectionSystem_HA": {
+              "description": "Шаблоны коллекций системной БД вендингового аппарата",
+              "list": [
+                {
+                  "name": "loggingData",
+                  "description": "Внутренние журналы работы аппарата",
+                  "type": "Capped",
+                  "params": {
+                    "capped": true,
+                    "size": 52428800
+                  }
+                },
+                {
+                  "name": "systemData",
+                  "description": "Системные параметры аппарата",
+                  "type": "Standart",
+                  "params": {}
+                },
+                {
+                  "name": "projectData",
+                  "description": "Конфигурационные данные проекта",
+                  "type": "Standart",
+                  "params": {}
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "externalServices": {
+      "description": "Конфигурация дополнительных программных компонентов HA - уровень аппарат",
+      "dataBase": {
+        "description": "Конфигурация БД внешних сервисов",
+        "grayLog": {
+          "description": "Статическая конфигурация сервера логирования Graylog",
+          "typeDBMS": "MongoDB",
+          "dbPostfix": "-graylog",
+          "userName": "graylog",
+          "collection_Graylog": {
+            "description": "Шаблоны коллекций БД сервера логирования Graylog",
+            "list": []
+          }
+        }
+      },
+      "settingsServices": {
+        "description": "Конфигурация переменных внешних сервисов",
+        "nodeRed": {
+          "description": "Конфигурация сервера Node-Red",
+          "startPort": 2001
+        }
+      }
+    }
+  },
+  "hubHi": {
+    "description": "Конфигурация АСУ - верхний уровень",
+    "sessionGeneration": false,
+    "system": {
+      "hubIP": "10.130.1.13",
+      "hostNamePrefix": "hubHi",
+      "users": [
+        {
+          "userTemplate": "operator",
+          "typeNameUsers": "dynamic",
+          "role": "operator",
+          "countUsers": 1
+        }
+      ]
+    },
+    "internalServices": {
+      "description": "Конфигурация программных компонентов фреймворка HA - верхний уровень",
+      "generalDatabase": {
+        "description": "Конфигурация рабочих БД фреймворка HA",
+        "horizonAutomation": {
+          "typeDBMS": "MongoDB",
+          "dbPostfix": "-general-ASUhi-HA",
+          "collectionGeneral_HA": {
+            "description": "Шаблоны коллекций для основной БД фреймворка HA",
+            "list": [
+              {
+                "name": "rawData",
+                "description": "Хранение 'сырых', необработанных данных",
+                "type": "TimeSeries",
+                "params": {
+                  "timeseries": {
+                    "timeField": "timestamp",
+                    "metaField": "metadata",
+                    "granularity": "seconds"
+                  },
+                  "expireAfterSeconds": 864000
+                }
+              },
+              {
+                "name": "fineData",
+                "description": "Хранение обработанных, нормализованных данных",
+                "type": "TimeSeries",
+                "params": {
+                  "timeseries": {
+                    "timeField": "timestamp",
+                    "metaField": "metadata",
+                    "granularity": "seconds"
+                  },
+                  "expireAfterSeconds": 864000
+                }
+              },
+              {
+                "name": "archiveData",
+                "description": "Архив важных событий. Кольцевой буфер.",
+                "type": "Capped",
+                "params": {
+                  "capped": true,
+                  "size": 52428800
+                }
+              },
+              {
+                "name": "loggingData",
+                "description": "Внутренние журналы работы платформы. Кольцевой буфер.",
+                "type": "Capped",
+                "params": {
+                  "capped": true,
+                  "size": 52428800
+                }
+              },
+              {
+                "name": "systemData",
+                "description": "Системные флаги и параметры времени выполнения",
+                "type": "Standart",
+                "params": {}
+              },
+              {
+                "name": "projectData",
+                "description": "Конфигурационные данные проекта",
+                "type": "Standart",
+                "params": {}
+              },
+              {
+                "name": "devicesHandbook",
+                "description": "Библиотека-справочник типов устройств.",
+                "type": "Standart",
+                "params": {}
+              }
+            ]
+          }
+        },
+        "systemDatabases": {
+          "description": "Конфигурация системных БД вендингового аппарата (пусто на данном хабе)"
+        }
+      }
+    },
+    "externalServices": {
+      "description": "Конфигурация дополнительных программных компонентов HA - уровень аппарат",
+      "dataBase": {
+        "description": "Конфигурация БД внешних сервисов (пусто на данном хабе)"
+      },
+      "settingsServices": {
+        "description": "Конфигурация переменных внешних сервисов",
+        "nodeRed": {
+          "description": "Конфигурация сервера Node-Red",
+          "startPort": 2001
+        }
+      }
+    }
+  }
+}
